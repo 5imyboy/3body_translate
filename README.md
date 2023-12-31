@@ -1,2 +1,2 @@
 # 3body_translate
-learn Chinese by translating 
+got the book The 3 Body Problem but I can't read it.
