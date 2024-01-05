@@ -17,15 +17,17 @@ class page:
     pageNum = 0
     text = []
 
-def pdfinit():
+def pdfinit(remake=False):
     """
     converts the pdf in the pdf folder into a text file.
     only supports 1 pdf for now, which is the first pdf it finds in the folder.
+    returns a list of dictionaries, each dictionary represents a page of text
+
+    parameter remake: default false. If true will remake txt even if it exists
     """
     # find path of input and output file
     inFile = ""
     outFile = ""
-    textExists = False
     for f in os.listdir(PATH+INPATH):
         if f[-4:] == ".pdf":
             inFile = PATH+INPATH+f
@@ -33,7 +35,7 @@ def pdfinit():
             break
     
     # if output file already exists we don't have to make it again
-    if os.path.isfile(outFile):
+    if os.path.isfile(outFile) and not remake:
         return
     
     # create document for extraction with configurations
@@ -54,6 +56,8 @@ def pdfinit():
     for c in content:
         makepage(f, c)
     f.close()
+
+    return content
 
 # TODO: insert class (with SQL)
 def makepage(file, content):
