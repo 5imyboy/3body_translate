@@ -29,7 +29,7 @@ def pdfinit(remake=False):
     inFile = ""
     outFile = ""
     for f in os.listdir(PATH+INPATH):
-        if f[-4:] == ".pdf":
+        if isPDF(f):
             inFile = PATH+INPATH+f
             outFile = PATH+OUTPATH+f[:-4]+".txt"
             break
@@ -63,22 +63,5 @@ def pdfinit(remake=False):
 def makepage(file, content):
     file.write(content['text'])
 
-    '''
-    pdfinFileObj = open(inFile, 'rb')
-
-    pdfReader = PyPDF2.PdfReader(pdfFileObj)
-
-
-    i=0
-    while i < len(pdfReader.pages):
-        pageObj = pdfReader.pages[i]
-
-        # extracting text from page
-        print(pageObj.extract_text())
-        print(i)
-
-        i = i+1
-
-    # closing the pdf file object
-    pdfFileObj.close()
-    '''
+def isPDF(f):
+    return f[-4:] == ".pdf"

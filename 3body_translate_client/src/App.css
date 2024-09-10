@@ -1,0 +1,37 @@
+.App {
+  min-height: 100vh;
+  text-align: center;
+  background-color: #282c34;
+}
+
+.App-header {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Book {
+  color: white;
+  float: left;
+  width: 45vw;
+  min-height: 100vh;
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.Page {
+  color: white;
+  margin-left: 50%;
+  width: 45vw;
+}
+
+.pageWrap {
+  font-size: 12px;
+  text-align: left;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

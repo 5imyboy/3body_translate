@@ -1,5 +1,10 @@
 import mysql.connector
 
+"""
+Run:
+GRANT ALL PRIVILEGES ON translate.* to '3body'@'localhost'
+in mysql before using this
+"""
 def dbTranslate3bodySetup(content):
     """
     Makes a new SQL database and table for the translation of the 3 Body Problem.

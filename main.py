@@ -2,6 +2,7 @@ import argparse
 import parsepdf as p
 import translate_ch as t
 import SQL3body as db
+import mysql.connector
 
 def main():
 
@@ -15,6 +16,35 @@ def main():
     if (content):
         content = t.translateEnglish(content)
         db.dbTranslate3bodySetup(content)
+    '''
+
+    d = mysql.connector.connect(
+    host="localhost",
+    user="3body",
+    password="password"
+    )
+    cursor = d.cursor()
+
+    columns = [
+        "page_number",
+        "untranslated_chinese",
+        "translated_english"
+    ]
+
+    setup_queries = [
+        "CREATE DATABASE IF NOT EXISTS translate ",
+        "USE translate ",
+        "DROP TABLE IF EXISTS 3body ",
+        "CREATE TABLE 3body ("+columns[0]+" INT, "+columns[1]+" TEXT, "+columns[2]+" TEXT) "
+    ]
+    
+    for query in setup_queries:
+        cursor.execute(query)
+
+    d.commit()
+    cursor.close()
+    d.close()
+    '''
 
 if __name__ == "__main__":
     main()
