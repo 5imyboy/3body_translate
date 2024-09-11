@@ -10,7 +10,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 PAGE=0
 PATH=os.getcwd()
-INPATH="/pdf/"
+INPATH="/3body_translate_client/public/pdf/"
 OUTPATH="/txt/"
 
 class page:
