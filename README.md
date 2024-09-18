@@ -29,8 +29,13 @@ TODO: configure run.sh to do all this in a single step
 
 
 Dependencies and Sources
+
 React: This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 UI: shadcn.ui: https://ui.shadcn.com
+
 Python PDF parser: https://pypi.org/project/multilingual-pdf2text/
+
 Python Translation Library: https://pypi.org/project/deep-translator/ using google translate
+
 MySQL: https://www.mysql.com
