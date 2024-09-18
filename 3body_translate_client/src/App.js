@@ -1,7 +1,8 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
+import throttle from "lodash.throttle";
 
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -68,6 +69,16 @@ let page_number=1;
 
 function App() {
   const [pageNumber, setPageNumber] = useState(page_number);
+  //https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    window.addEventListener("resize", throttle(setPDFSize, 25));
+  }, []);
+
+  function setPDFSize() {
+    setWindowWidth(window.innerWidth);
+  }
+
   function onPageDownClick() {
     if (pageNumber > 1) {
       setPageNumber(pageNumber - 1);
@@ -85,7 +96,7 @@ function App() {
           Three Body Translate
         </p>
       </header>
-      <OriginalBook pageNumber={pageNumber} />
+      <OriginalBook pageNumber={pageNumber} width={windowWidth * .45} />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<GetPage pageNumber={pageNumber} />} />
@@ -119,9 +130,9 @@ function OriginalBook(props) {
   //console.log(pageNumber);
 
   return (
-    <div id="Book" className="Book">
+    <div className="w-fit ml-5 float-left">
       <Document file="/pdf/threeBodyChinese.pdf">
-        <Page pageNumber={props.pageNumber} />
+        <Page pageNumber={props.pageNumber} width={props.width} />
       </Document>
     </div>
   )
