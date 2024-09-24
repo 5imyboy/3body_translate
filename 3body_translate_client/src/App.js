@@ -96,14 +96,18 @@ function App() {
           Three Body Translate
         </p>
       </header>
-      <OriginalBook pageNumber={pageNumber} width={windowWidth * .45} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<GetPage pageNumber={pageNumber} />} />
-        </Routes>
-      </BrowserRouter>
-      <Button variant="outline" onClick = {onPageDownClick}>&larr;</Button>
-      <Button variant="outline" onClick = {onPageUpClick}>&rarr;</Button>
+      <div className="flex flex-row">
+          <OriginalBook pageNumber={pageNumber} width={windowWidth * .45} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<GetPage pageNumber={pageNumber} />} />
+            </Routes>
+          </BrowserRouter>
+      </div>
+      <div className="text-white mb-1 mt-5">
+        <Button variant="outline" size="icon" onClick = {onPageDownClick}>&larr;</Button>
+        <Button variant="outline" size="icon" onClick = {onPageUpClick}>&rarr;</Button>
+      </div>
     </div>
   );
 }
@@ -130,7 +134,7 @@ function OriginalBook(props) {
   //console.log(pageNumber);
 
   return (
-    <div className="w-fit ml-5 float-left">
+    <div className="w-fit ml-5">
       <Document file="/pdf/threeBodyChinese.pdf">
         <Page pageNumber={props.pageNumber} width={props.width} />
       </Document>

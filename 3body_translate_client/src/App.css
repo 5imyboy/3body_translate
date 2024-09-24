@@ -4,6 +4,7 @@
 
 .App {
   min-height: 100vh;
+  overflow: auto;
   text-align: center;
   background-color: #282c34;
 }
@@ -28,7 +29,7 @@
 
 .Page {
   color: white;
-  margin-left: 50%;
+  margin-left: 5%;
   width: 45vw;
   min-height: 100vh;
 }
