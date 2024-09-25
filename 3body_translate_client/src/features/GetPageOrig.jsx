@@ -2,14 +2,13 @@ import '../App.css'
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 
-function GetPage(props) {
+function GetPageOrig(props) {
     const [Page, setPage] = useState([]);
-    //const pageNumber = useParams();
     const pageNumber = props.pageNumber;
     useEffect(() => {
         const getPage = async() => {
             try {
-                const link = "http://localhost:8080/" + pageNumber;// + pageNumber["page_number"];
+                const link = "http://localhost:8080/" + pageNumber;
                 const res = await axios.get(link)
                 setPage(res.data);
             }catch(error) {
@@ -19,15 +18,15 @@ function GetPage(props) {
         getPage();
     }, [pageNumber]);
     console.log(Page);
-    let translated_data = "";
+    let original_data = "";
     if (Page.data && Page.data[0]) {
-        translated_data = Page.data[0].translated_english;
+        original_data = Page.data[0].untranslated_chinese;
     }
     return (
         <div className="Page">
-            <h2>Translated: page {pageNumber}</h2>
+            <h2>Original: page {pageNumber}</h2>
             <pre className="pageWrap">
-                {translated_data}
+                {original_data}
             </pre>
         </div>
     );
@@ -52,4 +51,4 @@ function processErr(error){
     }
 }
 
-export default GetPage;
+export default GetPageOrig;

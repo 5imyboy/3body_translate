@@ -11,6 +11,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 import Get3Body from './features/Get3Body';
 import GetPage from './features/GetPage';
+import GetPageOrig from './features/GetPageOrig'
 
 const BASE_API_URL = "http://localhost:8081";
 
@@ -54,12 +55,18 @@ function App() {
   const [pageNumber, setPageNumber] = useState(page_number);
   //https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [displayPDF, setDisplayPDF] = useState(1);
+
   useEffect(() => {
     window.addEventListener("resize", throttle(setPDFSize, 25));
   }, []);
 
   function setPDFSize() {
     setWindowWidth(window.innerWidth);
+  }
+
+  function onDisplayPDFClick() {
+    setDisplayPDF(!displayPDF);
   }
 
   function onPageDownClick() {
@@ -80,14 +87,20 @@ function App() {
         </p>
       </header>
       <div className="flex flex-row">
+        <div style={{display: displayPDF ? 'block' : 'none'}}>
           <OriginalBook pageNumber={pageNumber} width={windowWidth * .45} />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<GetPage pageNumber={pageNumber} />} />
-            </Routes>
-          </BrowserRouter>
+        </div>
+        <div style={{display: !displayPDF ? 'block' : 'none'}}>
+          <GetPageOrig pageNumber={pageNumber} />
+        </div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<GetPage pageNumber={pageNumber} />} />
+          </Routes>
+        </BrowserRouter>
       </div>
       <div className="text-white mb-1 mt-5">
+        <Button variant="outline" onClick={onDisplayPDFClick}>Switch Display</Button>
         <Button variant="outline" size="icon" onClick = {onPageDownClick}>&larr;</Button>
         <Button variant="outline" size="icon" onClick = {onPageUpClick}>&rarr;</Button>
       </div>
