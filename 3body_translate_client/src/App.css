@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 .App {
-  min-height: 100vh;
+  height: 100vh;
   overflow: auto;
   text-align: center;
   background-color: #282c34;
 }
 
 .App-header {
-  min-height: 10vh;
+  height: 10vh;
   display: flex;
   flex-direction: row;
   justify-content: center;

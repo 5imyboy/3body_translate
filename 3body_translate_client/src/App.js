@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import throttle from "lodash.throttle";
 
 import { Button } from "./components/ui/button"
+import { ScrollArea } from "./components/ui/scroll-area"
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
@@ -86,19 +87,17 @@ function App() {
           Three Body Translate
         </p>
       </header>
-      <div className="flex flex-row">
-        <div style={{display: displayPDF ? 'block' : 'none'}}>
-          <OriginalBook pageNumber={pageNumber} width={windowWidth * .45} />
+      <ScrollArea className="h-4/5">
+        <div className="flex flex-row">
+          <div style={{display: displayPDF ? 'block' : 'none'}}>
+            <OriginalBook pageNumber={pageNumber} width={windowWidth * .45} />
+          </div>
+          <div style={{display: !displayPDF ? 'block' : 'none'}}>
+            <GetPageOrig pageNumber={pageNumber} />
+          </div>
+          <GetPage pageNumber={pageNumber} />
         </div>
-        <div style={{display: !displayPDF ? 'block' : 'none'}}>
-          <GetPageOrig pageNumber={pageNumber} />
-        </div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<GetPage pageNumber={pageNumber} />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      </ScrollArea>
       <div className="text-white mb-1 mt-5">
         <Button variant="outline" onClick={onDisplayPDFClick}>Switch Display</Button>
         <Button variant="outline" size="icon" onClick = {onPageDownClick}>&larr;</Button>
